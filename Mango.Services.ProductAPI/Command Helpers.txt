@@ -5,3 +5,5 @@ PM> update-database
 SqlLocalDB delete MSSQLLocalDB
 SqlLocalDB create MSSQLLocalDB
 SqlLocalDB start MSSQLLocalDB
+
+...
