@@ -1,2 +1,7 @@
 ﻿PM> Add-Migration AddProductModelToDB
 PM> update-database
+
+-- SQL Express Repair
+SqlLocalDB delete MSSQLLocalDB
+SqlLocalDB create MSSQLLocalDB
+SqlLocalDB start MSSQLLocalDB
