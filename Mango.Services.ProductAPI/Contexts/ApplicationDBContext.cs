@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Mango.Services.ProductAPI.Models;
+﻿using Mango.Services.ProductAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mango.Services.ProductAPI.Contexts

@@ -1,5 +1,4 @@
-﻿using Mango.Services.ProductAPI;
-using Mango.Web.Models;
+﻿using Mango.Web.Models;
 using Mango.Web.Services.IServices;
 using Newtonsoft.Json;
 using System;
@@ -12,18 +11,12 @@ namespace Mango.Web.Services
 {
     public class BaseService : IBaseService
     {
-        public ResponseDTO responseModel { get; set; }
+        public ResponseDTO ResponseModel { get; set; } = new();
         public IHttpClientFactory httpClient { get; set; }
 
         public BaseService(IHttpClientFactory httpClient)
         {
-            this.responseModel = new ResponseDTO();
             this.httpClient = httpClient;
-        }
-
-        public void Dispose()
-        {
-            GC.SuppressFinalize(true);
         }
 
         public async Task<T> SendAsync<T>(ApiRequest apiRequest)
@@ -76,6 +69,11 @@ namespace Mango.Web.Services
                 var apiResponseDTO = JsonConvert.DeserializeObject<T> (res);
                 return apiResponseDTO;
             }
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(true);
         }
     }
 }

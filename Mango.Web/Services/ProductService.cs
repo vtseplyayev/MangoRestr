@@ -1,5 +1,4 @@
-﻿using Mango.Services.ProductAPI;
-using Mango.Web.Models;
+﻿using Mango.Web.Models;
 using Mango.Web.Services.IServices;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,11 +7,11 @@ namespace Mango.Web.Services
 {
     public class ProductService : BaseService, IProductService
     {
-        private readonly IHttpClientFactory _clientFactory;
+        private readonly IHttpClientFactory clientFactory;
 
         public ProductService(IHttpClientFactory clientFactory): base(clientFactory)
         {
-            _clientFactory = clientFactory;
+            this.clientFactory = clientFactory;
         }
 
         public async Task<T> CreateProductAsync<T>(ProductDTO productDTO)

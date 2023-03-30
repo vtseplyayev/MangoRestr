@@ -12,24 +12,26 @@ namespace Mango.Services.Identity.Initializer
 {
     public class DBInitializer : IDBInitializer
     {
-        private readonly ApplicationDBContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDBContext context;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
         public DBInitializer(ApplicationDBContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            _context = context;
-            _userManager = userManager;
-            _roleManager = roleManager;
+            this.context = context;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public void Initialize()
         {
-            if(_roleManager.FindByNameAsync(SD.Admin).Result == null)
+            if (roleManager.FindByNameAsync(SD.Admin).Result == null)
             {
-                _roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Customer)).GetAwaiter().GetResult();
-            } else { return;  }
+                roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
+                roleManager.CreateAsync(new IdentityRole(SD.Customer)).GetAwaiter().GetResult();
+            }
+            else
+                return;
 
             ApplicationUser adminUser = new ApplicationUser()
             {
@@ -41,10 +43,10 @@ namespace Mango.Services.Identity.Initializer
                 LastName = "Admin"
             };
 
-            _userManager.CreateAsync(adminUser, "Admin123*").GetAwaiter().GetResult();
-            _userManager.AddToRoleAsync(adminUser, SD.Admin).GetAwaiter().GetResult();
+            userManager.CreateAsync(adminUser, "Admin123*").GetAwaiter().GetResult();
+            userManager.AddToRoleAsync(adminUser, SD.Admin).GetAwaiter().GetResult();
 
-            var temp1 = _userManager.AddClaimsAsync(adminUser, new Claim[]
+            var temp1 = userManager.AddClaimsAsync(adminUser, new Claim[]
             {
                 new Claim(JwtClaimTypes.Name, adminUser.FirstName + " " + adminUser.LastName),
                 new Claim(JwtClaimTypes.GivenName, adminUser.FirstName),
@@ -62,10 +64,10 @@ namespace Mango.Services.Identity.Initializer
                 LastName = "Customer"
             };
 
-            _userManager.CreateAsync(customerUser, "Customer123*").GetAwaiter().GetResult();
-            _userManager.AddToRoleAsync(customerUser, SD.Customer).GetAwaiter().GetResult();
+            userManager.CreateAsync(customerUser, "Customer123*").GetAwaiter().GetResult();
+            userManager.AddToRoleAsync(customerUser, SD.Customer).GetAwaiter().GetResult();
 
-            var temp2 = _userManager.AddClaimsAsync(customerUser, new Claim[]
+            var temp2 = userManager.AddClaimsAsync(customerUser, new Claim[]
             {
                 new Claim(JwtClaimTypes.Name, customerUser.FirstName + " " + customerUser.LastName),
                 new Claim(JwtClaimTypes.GivenName, customerUser.FirstName),

@@ -8,6 +8,7 @@ namespace Mango.Services.Identity.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        // Start Extended properties
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }

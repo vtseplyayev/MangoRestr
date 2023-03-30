@@ -15,7 +15,6 @@ namespace Mango.Services.Identity.Controllers
         {
             ViewBag.Version = typeof(Duende.IdentityServer.Hosting.IdentityServerMiddleware).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split('+').First();
             return View();
-
         }
     }
 }

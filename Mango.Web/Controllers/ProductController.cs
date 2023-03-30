@@ -11,16 +11,17 @@ namespace Mango.Web.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductService _productService;
+        private readonly IProductService productService;
+
         public ProductController(IProductService productService)
         {
-            _productService = productService;
+            this.productService = productService;
         }
 
         public async Task<IActionResult> Index()
         {
             List<ProductDTO> list = new();
-            var response = await _productService.GetAllProductAsync<ResponseDTO>();
+            var response = await productService.GetAllProductAsync<ResponseDTO>();
 
             if (response != null && response.IsSuccess)
                 list = JsonConvert.DeserializeObject<List<ProductDTO>>(Convert.ToString(response.Result));
@@ -39,7 +40,7 @@ namespace Mango.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _productService.CreateProductAsync<ResponseDTO>(model);
+                var response = await productService.CreateProductAsync<ResponseDTO>(model);
 
                 if (response != null && response.IsSuccess)
                     return RedirectToAction(nameof(Index));
@@ -50,7 +51,7 @@ namespace Mango.Web.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var response = await _productService.GetProductByIdAsync<ResponseDTO>(id);
+            var response = await productService.GetProductByIdAsync<ResponseDTO>(id);
 
             if (response != null && response.IsSuccess)
             {
@@ -65,7 +66,7 @@ namespace Mango.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(ProductDTO model)
         {
-            var response = await _productService.UpdateProductAsync<ResponseDTO>(model);
+            var response = await productService.UpdateProductAsync<ResponseDTO>(model);
 
             if (response != null && response.IsSuccess)
                 return RedirectToAction(nameof(Index));
@@ -75,7 +76,7 @@ namespace Mango.Web.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _productService.GetProductByIdAsync<ResponseDTO>(id);
+            var response = await productService.GetProductByIdAsync<ResponseDTO>(id);
 
             if (response != null && response.IsSuccess)
             {
@@ -90,7 +91,7 @@ namespace Mango.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(ProductDTO model)
         {
-            var response = await _productService.DeleteProductAsync<ResponseDTO>(model.ProductId);
+            var response = await productService.DeleteProductAsync<ResponseDTO>(model.ProductId);
 
             if (response.IsSuccess)
                 return RedirectToAction(nameof(Index));
