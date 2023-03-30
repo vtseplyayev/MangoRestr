@@ -234,7 +234,6 @@ namespace IdentityServerHost.Quickstart.UI
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-
                 var user = new ApplicationUser
                 {
                     UserName = model.Username,
@@ -263,6 +262,8 @@ namespace IdentityServerHost.Quickstart.UI
                     await _userManager.AddClaimsAsync(user, new Claim[]{
                             new Claim(JwtClaimTypes.Name, model.Username),
                             new Claim(JwtClaimTypes.Email, model.Email),
+                            new Claim(JwtClaimTypes.FamilyName, model.FirstName),
+                            new Claim(JwtClaimTypes.GivenName, model.LastName),
                             new Claim(JwtClaimTypes.WebSite, "http://"+model.Username+".com"),
                             new Claim(JwtClaimTypes.Role,"User") });
 
@@ -304,6 +305,11 @@ namespace IdentityServerHost.Quickstart.UI
 
                 }
             }
+
+            List<string> roles = new List<string>();
+            roles.Add("Admin");
+            roles.Add("Customer");
+            ViewBag.message = roles;
 
             // If we got this far, something failed, redisplay form
             return View(model);
