@@ -55,8 +55,6 @@ namespace Mango.Services.ProductAPI.Controllers
             return response;
         }
 
-
-
         [HttpPost]
         public async Task<object> Post([FromBody] ProductDTO productDTO)
         {
@@ -92,6 +90,7 @@ namespace Mango.Services.ProductAPI.Controllers
         }
 
         [HttpDelete]
+        [Route("{id}")]
         public async Task<object> Delete(int id)
         {
             try
