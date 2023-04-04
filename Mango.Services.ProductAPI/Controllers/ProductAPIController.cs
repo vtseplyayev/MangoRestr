@@ -20,7 +20,7 @@ namespace Mango.Services.ProductAPI.Controllers
             this.productRepository = productRepository;
         }
 
-        [Authorize]
+
         [HttpGet]
         public async Task<object> Get()
         {

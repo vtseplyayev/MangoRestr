@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33214.272
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{A08AECE5-7D14-4115-B236-774724D7569A}"
 EndProject
@@ -11,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{85
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.ProductAPI", "Mango.Services.ProductAPI\Mango.Services.ProductAPI.csproj", "{7B4FFD75-AEE9-4C72-98F8-33DA06128D26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Services.Identity", "Mango.Services.Identity\Mango.Services.Identity.csproj", "{60FDFE01-E97A-4CD4-B6F2-63E604569616}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.Identity", "Mango.Services.Identity\Mango.Services.Identity.csproj", "{60FDFE01-E97A-4CD4-B6F2-63E604569616}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Services.ShoppingCartAPI", "Mango.Services.ShoppingCartAPI\Mango.Services.ShoppingCartAPI.csproj", "{0D585C91-60A1-4AD1-AB3E-A9C927D428B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{60FDFE01-E97A-4CD4-B6F2-63E604569616}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60FDFE01-E97A-4CD4-B6F2-63E604569616}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60FDFE01-E97A-4CD4-B6F2-63E604569616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D585C91-60A1-4AD1-AB3E-A9C927D428B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D585C91-60A1-4AD1-AB3E-A9C927D428B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D585C91-60A1-4AD1-AB3E-A9C927D428B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D585C91-60A1-4AD1-AB3E-A9C927D428B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{FDC6B5FC-B74B-40CF-85E3-86BCDF63CFD9} = {A08AECE5-7D14-4115-B236-774724D7569A}
 		{7B4FFD75-AEE9-4C72-98F8-33DA06128D26} = {856BE2A8-9F33-4DA0-B503-E3A311FA0F73}
 		{60FDFE01-E97A-4CD4-B6F2-63E604569616} = {856BE2A8-9F33-4DA0-B503-E3A311FA0F73}
+		{0D585C91-60A1-4AD1-AB3E-A9C927D428B2} = {856BE2A8-9F33-4DA0-B503-E3A311FA0F73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12E0C41A-C95A-456A-8DB4-8D4FA49AC206}
