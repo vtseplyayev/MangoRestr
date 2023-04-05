@@ -25,6 +25,7 @@ namespace Mango.Web
             services.AddHttpClient<ICartService, CartService>();
             SD.ProductAPIBase = Configuration["ServiceURLs:ProductAPI"];
             SD.ShoppingCartAPIBase = Configuration["ServiceURLs:ShoppingCartAPI"];
+            SD.CouponAPIBase = Configuration["ServiceURLs:CouponApi"];
 
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICartService, CartService>();
