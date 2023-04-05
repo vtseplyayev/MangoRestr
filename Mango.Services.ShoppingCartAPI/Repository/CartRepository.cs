@@ -2,6 +2,7 @@
 using Mango.Services.ShoppingCartAPI.Contexts;
 using Mango.Services.ShoppingCartAPI.Models;
 using Mango.Services.ShoppingCartAPI.Models.DTO;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System;
@@ -19,6 +20,17 @@ namespace Mango.Services.ShoppingCartAPI.Repository
         {
             this.context = context;
             this.mapper = mapper;
+        }
+
+        public async Task<bool> ApplyCoupon(string userId, string coupon)
+        {
+            var cartFromDb = await context.CartHeader.FirstOrDefaultAsync(u => u.UserId == userId);
+            cartFromDb.CouponCode = coupon;
+            context.CartHeader.Update(cartFromDb);
+
+            await context.SaveChangesAsync();
+
+            return true;
         }
 
         public async Task<bool> CleanCart(string userId)
@@ -105,6 +117,18 @@ namespace Mango.Services.ShoppingCartAPI.Repository
 
         }
 
+        public async Task<bool> RemoveCoupon(string userId)
+        {
+            var cartFromDb = await context.CartHeader.FirstOrDefaultAsync(u => u.UserId == userId);
+            cartFromDb.CouponCode = "";
+            context.CartHeader.Update(cartFromDb);
+
+            await context.SaveChangesAsync();
+
+            return true;
+        }
+
+        [HttpGet]
         public async Task<bool> RemoveFromCart(int cartDetailsId)
         {
             try
@@ -134,5 +158,8 @@ namespace Mango.Services.ShoppingCartAPI.Repository
                 return false;
             }
         }
+
+
+
     }
 }

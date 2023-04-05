@@ -11,6 +11,8 @@ namespace Mango.Services.ShoppingCartAPI.Repository
         Task<CartDTO> GetCartByUserId(string userId);
         Task<CartDTO> CreateUpdateCart(CartDTO cartDTO);
         Task<bool> RemoveFromCart(int cartDetailsId);
+        Task<bool> ApplyCoupon(string userId, string coupon);
+        Task<bool> RemoveCoupon(string userId);
         Task<bool> CleanCart(string userId);
     }
 }
