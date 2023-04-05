@@ -1,5 +1,6 @@
 using Mango.Web.Services;
 using Mango.Web.Services.IServices;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,10 +21,13 @@ namespace Mango.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient<IProductService>();
+            services.AddHttpClient<IProductService, ProductService>();
+            services.AddHttpClient<ICartService, CartService>();
             SD.ProductAPIBase = Configuration["ServiceURLs:ProductAPI"];
+            SD.ShoppingCartAPIBase = Configuration["ServiceURLs:ShoppingCartAPI"];
 
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICartService, CartService>();
             services.AddControllersWithViews();
 
             services.AddAuthentication(options =>
@@ -39,6 +43,8 @@ namespace Mango.Web
                     options.ClientId = "mango";
                     options.ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
                     options.ResponseType = "code";
+                    options.ClaimActions.MapJsonKey("role", "role", "role");
+                    options.ClaimActions.MapJsonKey("sub", "sub", "sub");
 
                     options.TokenValidationParameters.NameClaimType = "name";
                     options.TokenValidationParameters.RoleClaimType = "role";

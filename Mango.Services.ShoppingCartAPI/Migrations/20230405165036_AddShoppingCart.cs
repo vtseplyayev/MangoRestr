@@ -2,7 +2,7 @@
 
 namespace Mango.Services.ShoppingCartAPI.Migrations
 {
-    public partial class AddProductAndCartModels : Migration
+    public partial class AddShoppingCart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

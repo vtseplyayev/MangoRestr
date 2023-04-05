@@ -50,7 +50,9 @@ namespace Mango.Services.ShoppingCartAPI.Repository
                 await context.SaveChangesAsync();
             }
 
-            var cartHeaderFromDb = await context.CartHeader.AsNoTracking().FirstOrDefaultAsync(u => u.UserId == cart.CartHeader.UserId);
+            var cartHeaderFromDb = await context.CartHeader
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.UserId == cart.CartHeader.UserId);
 
             if (cartHeaderFromDb == null)
             {
@@ -64,8 +66,9 @@ namespace Mango.Services.ShoppingCartAPI.Repository
             }
             else
             {
-                var cartDetailsFromDb = await context.CartDetails.AsNoTracking().FirstOrDefaultAsync(
-                    u => u.ProductId == cart.CartDetails.FirstOrDefault().ProductId &&
+                var cartDetailsFromDb = await context.CartDetails
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(u => u.ProductId == cart.CartDetails.FirstOrDefault().ProductId &&
                     u.CartHeaderId == cartHeaderFromDb.CartHeaderId);
 
                 if (cartDetailsFromDb == null)

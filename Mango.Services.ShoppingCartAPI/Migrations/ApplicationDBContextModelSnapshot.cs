@@ -95,7 +95,7 @@ namespace Mango.Services.ShoppingCartAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Mango.Services.ShoppingCartAPI.Models.CartProduct", "Product")
+                    b.HasOne("Mango.Services.ShoppingCartAPI.Models.CartProduct", "CartProduct")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -103,7 +103,7 @@ namespace Mango.Services.ShoppingCartAPI.Migrations
 
                     b.Navigation("CartHeader");
 
-                    b.Navigation("Product");
+                    b.Navigation("CartProduct");
                 });
 #pragma warning restore 612, 618
         }
