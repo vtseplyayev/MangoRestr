@@ -7,7 +7,7 @@ using Duende.IdentityServer.Models;
 
 namespace Mango.Services.Identity
 {
-    public static class SD
+    public static class Config
     {
         public const string Admin = "Admin";
         public const string Customer = "Customer";

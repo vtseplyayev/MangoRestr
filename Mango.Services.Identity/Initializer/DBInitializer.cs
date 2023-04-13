@@ -25,10 +25,10 @@ namespace Mango.Services.Identity.Initializer
 
         public void Initialize()
         {
-            if (roleManager.FindByNameAsync(SD.Admin).Result == null)
+            if (roleManager.FindByNameAsync(Config.Admin).Result == null)
             {
-                roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
-                roleManager.CreateAsync(new IdentityRole(SD.Customer)).GetAwaiter().GetResult();
+                roleManager.CreateAsync(new IdentityRole(Config.Admin)).GetAwaiter().GetResult();
+                roleManager.CreateAsync(new IdentityRole(Config.Customer)).GetAwaiter().GetResult();
             }
             else
                 return;
@@ -44,14 +44,14 @@ namespace Mango.Services.Identity.Initializer
             };
 
             userManager.CreateAsync(adminUser, "Admin123*").GetAwaiter().GetResult();
-            userManager.AddToRoleAsync(adminUser, SD.Admin).GetAwaiter().GetResult();
+            userManager.AddToRoleAsync(adminUser, Config.Admin).GetAwaiter().GetResult();
 
             var temp1 = userManager.AddClaimsAsync(adminUser, new Claim[]
             {
                 new Claim(JwtClaimTypes.Name, adminUser.FirstName + " " + adminUser.LastName),
                 new Claim(JwtClaimTypes.GivenName, adminUser.FirstName),
                 new Claim(JwtClaimTypes.FamilyName, adminUser.LastName),
-                new Claim(JwtClaimTypes.Role, SD.Admin),
+                new Claim(JwtClaimTypes.Role, Config.Admin),
             }).Result;
 
             ApplicationUser customerUser = new ApplicationUser()
@@ -65,14 +65,14 @@ namespace Mango.Services.Identity.Initializer
             };
 
             userManager.CreateAsync(customerUser, "Customer123*").GetAwaiter().GetResult();
-            userManager.AddToRoleAsync(customerUser, SD.Customer).GetAwaiter().GetResult();
+            userManager.AddToRoleAsync(customerUser, Config.Customer).GetAwaiter().GetResult();
 
             var temp2 = userManager.AddClaimsAsync(customerUser, new Claim[]
             {
                 new Claim(JwtClaimTypes.Name, customerUser.FirstName + " " + customerUser.LastName),
                 new Claim(JwtClaimTypes.GivenName, customerUser.FirstName),
                 new Claim(JwtClaimTypes.FamilyName, customerUser.LastName),
-                new Claim(JwtClaimTypes.Role, SD.Customer),
+                new Claim(JwtClaimTypes.Role, Config.Customer),
             }).Result;
         }
     }

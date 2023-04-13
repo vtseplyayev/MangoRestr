@@ -45,9 +45,9 @@ namespace Mango.Services.Identity
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true; //gen static req
 
-            }).AddInMemoryIdentityResources(SD.IdentityResources)
-            .AddInMemoryApiScopes(SD.ApiScopes)
-            .AddInMemoryClients(SD.Clients)
+            }).AddInMemoryIdentityResources(Config.IdentityResources)
+            .AddInMemoryApiScopes(Config.ApiScopes)
+            .AddInMemoryClients(Config.Clients)
             .AddAspNetIdentity<ApplicationUser>();
 
             services.AddScoped<IDBInitializer, DBInitializer>();

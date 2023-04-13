@@ -1,6 +1,6 @@
 ﻿namespace Mango.Services.ProductAPI
 {
-    public static class SD
+    public static class Config
     {
 
     }

@@ -1,5 +1,6 @@
 using AutoMapper;
 using Mango.Services.ShoppingCartAPI.Contexts;
+using Mango.Services.ShoppingCartAPI.Messaging;
 using Mango.Services.ShoppingCartAPI.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,15 +32,18 @@ namespace Mango.Services.ShoppingCartAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddDbContext<ApplicationDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ShoppingCartDBConnection"))
             );
+
+            Config.CheckOutMessageTopic = Configuration["Topics:CheckOutMessage"];
+            Config.ServiceBusURL = Configuration["ServiceBusURLs:MangoBus"];
 
             IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
             services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICartRepository, CartRepository>();
+            services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
             services.AddControllers();
 
             services.AddAuthentication("Bearer")

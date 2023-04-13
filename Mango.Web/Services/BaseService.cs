@@ -42,13 +42,13 @@ namespace Mango.Web.Services
 
                 switch (apiRequest.ApiType)
                 {
-                    case SD.ApiType.POST:
+                    case Config.ApiType.POST:
                         message.Method = HttpMethod.Post;
                         break;
-                    case SD.ApiType.PUT:
+                    case Config.ApiType.PUT:
                         message.Method = HttpMethod.Put;
                         break;
-                    case SD.ApiType.DELETE:
+                    case Config.ApiType.DELETE:
                         message.Method = HttpMethod.Delete;
                         break;
                     default:

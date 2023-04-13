@@ -1,4 +1,4 @@
-﻿using static Mango.Web.SD;
+﻿using static Mango.Web.Config;
 
 namespace Mango.Web.Models
 {

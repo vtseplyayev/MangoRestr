@@ -18,9 +18,9 @@ namespace Mango.Web.Services
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
-                ApiType = SD.ApiType.POST,
+                ApiType = Config.ApiType.POST,
                 Data = productDTO,
-                Url = SD.ProductAPIBase + "/api/products",
+                Url = Config.ProductAPIBase + "/api/products",
                 AccessToken = token
             });
         }
@@ -29,8 +29,8 @@ namespace Mango.Web.Services
         {
             return await SendAsync<T>(new ApiRequest()
             {
-                ApiType = SD.ApiType.DELETE,
-                Url = SD.ProductAPIBase + "/api/products/"+id,
+                ApiType = Config.ApiType.DELETE,
+                Url = Config.ProductAPIBase + "/api/products/"+id,
                 AccessToken = token
             });
         }
@@ -39,8 +39,8 @@ namespace Mango.Web.Services
         {
             return await SendAsync<T>(new ApiRequest()
             {
-                ApiType = SD.ApiType.GET,
-                Url = SD.ProductAPIBase + "/api/products",
+                ApiType = Config.ApiType.GET,
+                Url = Config.ProductAPIBase + "/api/products",
                 AccessToken = token
             });
         }
@@ -49,8 +49,8 @@ namespace Mango.Web.Services
         {
             return await SendAsync<T>(new ApiRequest()
             {
-                ApiType = SD.ApiType.GET,
-                Url = SD.ProductAPIBase + "/api/products/" + id,
+                ApiType = Config.ApiType.GET,
+                Url = Config.ProductAPIBase + "/api/products/" + id,
                 AccessToken = token
             });
         }
@@ -59,9 +59,9 @@ namespace Mango.Web.Services
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
-                ApiType = SD.ApiType.PUT,
+                ApiType = Config.ApiType.PUT,
                 Data = productDTO,
-                Url = SD.ProductAPIBase + "/api/products",
+                Url = Config.ProductAPIBase + "/api/products",
                 AccessToken = token
             });
         }

@@ -1,6 +1,6 @@
 ﻿namespace Mango.Web
 {
-    public static class SD
+    public static class Config
     {
         public static string ProductAPIBase { get; set; }
         public static string ShoppingCartAPIBase { get; set; }
