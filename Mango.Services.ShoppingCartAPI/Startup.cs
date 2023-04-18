@@ -38,13 +38,19 @@ namespace Mango.Services.ShoppingCartAPI
 
             Config.CheckOutMessageTopic = Configuration["Topics:CheckOutMessage"];
             Config.ServiceBusURL = Configuration["ServiceBusURLs:MangoBus"];
+            Config.CouponAPI = Configuration["ServiceURLs:CouponApi"];
 
             IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
             services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICouponRepository, CouponRepository>();
             services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
             services.AddControllers();
+
+            services.AddHttpClient<ICouponRepository, CouponRepository>(
+                u => u.BaseAddress = new Uri(Config.CouponAPI)
+                );
 
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
@@ -65,7 +71,7 @@ namespace Mango.Services.ShoppingCartAPI
                 });
             });
 
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mango.Services.ShoppingCartAPI", Version = "v1" });

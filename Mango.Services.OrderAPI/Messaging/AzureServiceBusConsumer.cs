@@ -10,7 +10,7 @@ using Mango.Services.OrderAPI.Models;
 
 namespace Mango.Services.OrderAPI.Messaging
 {
-    public class AzureServiceBusConsumer
+    public class AzureServiceBusConsumer: IAzureServiceBusConsumer
     {
         private readonly OrderRepository orderRepository;
 
@@ -20,10 +20,14 @@ namespace Mango.Services.OrderAPI.Messaging
         {
             this.orderRepository = orderRepository;
 
-            var client = new ServiceBusClient(Config.ServiceBusURL);
+            var clientOptions = new ServiceBusClientOptions()
+            {
+                TransportType = ServiceBusTransportType.AmqpWebSockets
+            };
+
+            var client = new ServiceBusClient(Config.ServiceBusURL, clientOptions);
 
             busProcessor = client.CreateProcessor(Config.CheckOutMessageTopic, Config.Subscription);
-
         }
 
         public async Task Start()

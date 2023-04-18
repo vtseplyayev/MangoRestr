@@ -9,5 +9,6 @@ namespace Mango.Services.ShoppingCartAPI
     {
         public static string CheckOutMessageTopic { get; set; }
         public static string ServiceBusURL { get; set; }
+        public static string CouponAPI { get; set; }
     }
 }
