@@ -38,8 +38,10 @@ namespace Mango.Services.OrderAPI
             );
 
             Config.CheckOutMessageTopic = Configuration["Topics:CheckOutMessage"];
+            Config.OrderPaymentProcessTopic = Configuration["Topics:OrderPaymentProcess"];
             Config.ServiceBusURL = Configuration["ServiceBusURLs:MangoBus"];
             Config.Subscription = Configuration["Subscription:Default"];
+            Config.PaymentSubscription = Configuration["Subscription:Payment"];
 
             //IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
             //services.AddSingleton(mapper);
@@ -50,6 +52,7 @@ namespace Mango.Services.OrderAPI
             optionBuilder.UseSqlServer(Configuration.GetConnectionString("OrderDBConnection"));
             services.AddSingleton(new OrderRepository(optionBuilder.Options));
             services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
+            services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
 
             services.AddControllers();
 

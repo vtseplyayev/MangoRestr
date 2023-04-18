@@ -16,9 +16,12 @@ namespace Mango.Services.OrderAPI.Messaging
 
         private ServiceBusProcessor busProcessor;
 
-        public AzureServiceBusConsumer(OrderRepository orderRepository)
+        private readonly IMessageBus messageBus;
+
+        public AzureServiceBusConsumer(OrderRepository orderRepository, IMessageBus messageBus)
         {
             this.orderRepository = orderRepository;
+            this.messageBus = messageBus;
 
             var clientOptions = new ServiceBusClientOptions()
             {
@@ -89,6 +92,23 @@ namespace Mango.Services.OrderAPI.Messaging
             }
 
             await orderRepository.AddOrder(orderHeader);
+
+            PaymentRequestMessage paymentRequestMessage = new()
+            {
+                Name = orderHeader.FirstName + " " + orderHeader.LastName,
+                OrderId = orderHeader.OrderHeaderId,
+                OrderTotal = orderHeader.OrderTotal,
+            };
+
+            try
+            {
+                await messageBus.PublishMessage(paymentRequestMessage, Config.OrderPaymentProcessTopic);
+                await args.CompleteMessageAsync(args.Message);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }
