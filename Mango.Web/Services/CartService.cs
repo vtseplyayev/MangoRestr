@@ -1,5 +1,4 @@
-﻿using Mango.Services.ProductAPI.Models.DTO;
-using Mango.Web.Models;
+﻿using Mango.Web.Models;
 using Mango.Web.Services.IServices;
 using System.Net.Http;
 using System.Threading.Tasks;
